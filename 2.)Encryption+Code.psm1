@@ -8,3 +8,10 @@ $AesProvider.KeySize = 256
 $AesProvider.BlockSize = 128
 $AesProvider.Mode = [System.Security.Cryptography.CipherMode]::CNC
 $KeyFormatter New-Object System.Security.Cryptography.RSAOAEPKeyExchangeFormatter ($Cert.PublicKey.Key)
+[Byte[]]$KeyEncrypted = $KeyFormatter.CreateKeyExchange($AesProvider.Key,$AesProvider.GetType())
+[Byte[]]$LenKey = $Null
+[Byte[]]$LenIV = $Null
+[int]$LKey = $KeyEncrypted.Length
+$LenKey = [System.BitConverter]::GetBytes($LKey)
+[int]$LIV = $AesProvider.IV.Length
+$LenIV = [System.BitConverter]::GetBytes($LIV)
