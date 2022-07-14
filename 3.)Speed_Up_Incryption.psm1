@@ -25,4 +25,4 @@ $s = 1
 do {
     $x += $x[$i - 1] + $intFilePerWorker
     $i++
-} while $i -le $intWorkersCount
+} while ($i -le $intWorkersCount)
