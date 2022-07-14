@@ -26,3 +26,10 @@ do {
     $x += $x[$i - 1] + $intFilePerWorker
     $i++
 } while ($i -le $intWorkersCount)
+
+for ($i = 0; $i -lt $x.Count -1; $i++)
+{
+    $StartLine = $x[$1]
+    $EndLine = $x[$i + 1]
+    Start-Job -ScriptBlock $DoEnc -ArgumentList ($FileListPath, $x[$i], $x[$i+])
+}
